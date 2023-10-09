@@ -15,8 +15,11 @@ class TOONTANKS_API ATank : public ABasePawn
 	GENERATED_BODY()
 
 public:
-	//Cosntructor for the tank
+	//Constructor for the tank
 	ATank();
+
+	// Called to bind functionality to input
+	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent);
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tank Components", meta = (AllowPrivateAccess = "true"))
@@ -24,6 +27,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tank Components", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* CameraComponent;
+
+	void Move(float Value);
 };
 
 
