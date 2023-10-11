@@ -22,6 +22,8 @@ public:
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent);
 
 private:
+	FVector DeltaLocation;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tank Components", meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringArmComponent;
 

@@ -13,6 +13,9 @@ ATank::ATank()
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Tank Camera"));
 	CameraComponent->SetupAttachment(SpringArmComponent);
+
+	//Init DeltaLocation
+	DeltaLocation = FVector::ZeroVector;
 }
 
 // Called to bind functionality to input
@@ -26,5 +29,9 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::Move(float Value)
 {
-	UE_LOG(LogTemp, Display, TEXT("La velovidad es de %f"), Value);
+	// UE_LOG(LogTemp, Display, TEXT("La velovidad es de %f"), Value);
+
+	// Adding movement forward
+	DeltaLocation.X = Value;	
+	AddActorLocalOffset(DeltaLocation);
 }
