@@ -18,10 +18,6 @@ public:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
 	FName PawnTag = "defaultTag";
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Customize Pawn", meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* CapsuleComp;

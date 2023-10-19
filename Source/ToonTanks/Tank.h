@@ -21,8 +21,15 @@ public:
 	// Called to bind functionality to input
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent);
 
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 private:
 	FVector DeltaLocation;
+	FRotator DeltaRotation;
+
+	APlayerController* PlayerControllerRef;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tank Components", meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringArmComponent;
@@ -30,7 +37,15 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tank Components", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* CameraComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tank Parameters", meta = (AllowPrivateAccess = "true"))
+	float TankSpeed = 200.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tank Parameters", meta = (AllowPrivateAccess = "true"))
+	float TankTurnRate = 100.f;
+
 	void Move(float Value);
+
+	void Turn(float Value);
 };
 
 
