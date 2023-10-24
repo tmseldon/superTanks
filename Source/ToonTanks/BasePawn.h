@@ -18,6 +18,9 @@ public:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
 	FName PawnTag = "defaultTag";
 
+protected:
+	void RotateTurret(FVector LookAtTarget);
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Customize Pawn", meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* CapsuleComp;

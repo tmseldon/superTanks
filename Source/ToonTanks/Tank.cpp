@@ -54,13 +54,17 @@ void ATank::Tick(float DeltaTime)
 			HitResult
 		);
 
-		DrawDebugSphere(
-			GetWorld(),
-			HitResult.ImpactPoint,
-			10.f,
-			12,
-			FColor::Green
-		);
+		// Debug Code for cursor
+		// 
+		//DrawDebugSphere(
+		//	GetWorld(),
+		//	HitResult.ImpactPoint,
+		//	10.f,
+		//	12,
+		//	FColor::Green
+		//);
+
+		ABasePawn::RotateTurret(HitResult.ImpactPoint);
 	}
 
 }
