@@ -14,13 +14,38 @@ void ATower::BeginPlay()
 
 	// Init variables
 	MaxSquaredDetectingRange = powf(MaxTowerDetectingRange, 2);
+	
+	GetWorldTimerManager().SetTimer(
+		FireRateTimeHandler,
+		this,
+		&ATower::CheckFireConditions,
+		FireRateSeconds,
+		true
+	);
 }
-
 
 void ATower::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (bIsPlayerInRange())
+	{
+		// Rotate the tower towards the player
+		ABasePawn::RotateTurret(PlayerTank->GetActorLocation());
+	}
+}
+
+void ATower::CheckFireConditions()
+{
+	if (bIsPlayerInRange())
+	{
+		ABasePawn::Fire();
+	}
+}
+
+// Helper method to check if the player is on range of shooting
+bool ATower::bIsPlayerInRange()
+{
 	if (PlayerTank)
 	{
 		// Calculate the squared distance, it is easier for calculations to get the squared distance
@@ -29,8 +54,9 @@ void ATower::Tick(float DeltaTime)
 		// Check if it is on range
 		if (SquaredDistanceToTank < MaxSquaredDetectingRange)
 		{
-			// Rotate the tower towards the player
-			ABasePawn::RotateTurret(PlayerTank->GetActorLocation());
+			return true;
 		}
 	}
+
+	return false;
 }

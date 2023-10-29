@@ -28,4 +28,11 @@ private:
 
 	float MaxSquaredDetectingRange;
 	class ATank* PlayerTank;
+
+	bool bIsPlayerInRange();
+
+	// Shooting related private members
+	FTimerHandle FireRateTimeHandler;
+	float FireRateSeconds = 2.f;
+	void CheckFireConditions();
 };
