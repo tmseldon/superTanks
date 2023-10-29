@@ -55,7 +55,7 @@ void ATank::Tick(float DeltaTime)
 		);
 
 		// Debug Code for cursor
-		// 
+		 
 		//DrawDebugSphere(
 		//	GetWorld(),
 		//	HitResult.ImpactPoint,
