@@ -27,4 +27,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Customize Projectile", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* ProjectileMesh;
 
+	UPROPERTY(VisibleAnywhere, Category = "Params Projectile")
+	class UProjectileMovementComponent* MovementComponent;
+
 };

@@ -2,6 +2,7 @@
 
 
 #include "BasePawn.h"
+#include "Projectile.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -42,13 +43,21 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 
 void ABasePawn::Fire()
 {
-	DrawDebugSphere(
-		GetWorld(),
+	// Debug purposes only
+	
+	//DrawDebugSphere(
+	//	GetWorld(),
+	//	ProjectileSpawnPoint->GetComponentLocation(),
+	//	10.f,
+	//	12,
+	//	FColor::Red,
+	//	false,
+	//	3.f
+	//);
+
+	GetWorld()->SpawnActor<AProjectile>(
+		ProjectileReferenceType,
 		ProjectileSpawnPoint->GetComponentLocation(),
-		10.f,
-		12,
-		FColor::Red,
-		false,
-		3.f
-	);
+		ProjectileSpawnPoint->GetComponentRotation()
+		);
 }
