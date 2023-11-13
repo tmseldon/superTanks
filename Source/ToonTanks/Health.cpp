@@ -41,7 +41,8 @@ void UHealth::DamageTaken(
 	AController* InstigatedBy, 
 	AActor* DamageCauser)
 {
-	UE_LOG(LogTemp, Warning, TEXT("DAmage taken"));
+	CurrentHealth -= Damage;
+	UE_LOG(LogTemp, Warning, TEXT("Damage taken: %f"), CurrentHealth);
 }
 
 
