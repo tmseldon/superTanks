@@ -24,6 +24,8 @@ void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// Setting callback for OnHit Event
+	ProjectileMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 }
 
 // Called every frame
@@ -31,5 +33,16 @@ void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+// Callback method when the projectile hits something
+void AProjectile::OnHit(
+	UPrimitiveComponent* HitComponent, 
+	AActor* OtherActor, 
+	UPrimitiveComponent* OtherComp, 
+	FVector NormalImpulse, 
+	const FHitResult& Hit)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Probando %s"), *OtherActor->GetName());
 }
 
