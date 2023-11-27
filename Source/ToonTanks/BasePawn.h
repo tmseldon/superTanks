@@ -18,6 +18,8 @@ public:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
 	FName PawnTag = "defaultTag";
 
+	void virtual HandleDestruction();
+
 protected:
 	void RotateTurret(FVector LookAtTarget);
 	void Fire();

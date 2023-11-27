@@ -37,7 +37,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PlayerControllerRef = Cast<APlayerController>(GetController());
+	TankPlayerController = Cast<APlayerController>(GetController());
 }
 
 // Called every frame
@@ -45,11 +45,11 @@ void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (PlayerControllerRef)
+	if (TankPlayerController)
 	{
 		FHitResult HitResult;
 
-		PlayerControllerRef->GetHitResultUnderCursor(
+		TankPlayerController->GetHitResultUnderCursor(
 			ECollisionChannel::ECC_Visibility,
 			false,
 			HitResult
@@ -68,6 +68,16 @@ void ATank::Tick(float DeltaTime)
 		ABasePawn::RotateTurret(HitResult.ImpactPoint);
 	}
 
+}
+
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+
+	// We make the player invisible to be able to see the camera
+	// And we remove Tick so no game cycle is available for the player
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
 }
 
 void ATank::Move(float Value)

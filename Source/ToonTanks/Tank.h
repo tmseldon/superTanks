@@ -24,6 +24,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void HandleDestruction() override;
+
+	// Getter for the Tank Player Controller
+	// For now used by ToonTank Game Mode
+	APlayerController* GetTankPlayerController() const { return TankPlayerController; };
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -32,7 +38,7 @@ private:
 	FVector DeltaLocation;
 	FRotator DeltaRotation;
 
-	APlayerController* PlayerControllerRef;
+	APlayerController* TankPlayerController;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tank Components", meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringArmComponent;

@@ -2,6 +2,8 @@
 
 
 #include "Health.h"
+#include "Kismet/GameplayStatics.h"
+#include "ToonTankGameMode.h"
 
 // Sets default values for this component's properties
 UHealth::UHealth()
@@ -21,7 +23,7 @@ void UHealth::BeginPlay()
 
 	CurrentHealth = MaxHealth;
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealth::DamageTaken);
-	
+	ToonTankGameMode = Cast<AToonTankGameMode>(UGameplayStatics::GetGameMode(this));
 }
 
 
@@ -41,8 +43,16 @@ void UHealth::DamageTaken(
 	AController* InstigatedBy, 
 	AActor* DamageCauser)
 {
+	if (Damage <= 0.f) return;
+
 	CurrentHealth -= Damage;
-	UE_LOG(LogTemp, Warning, TEXT("Damage taken: %f"), CurrentHealth);
+
+	if (CurrentHealth <= 0 && ToonTankGameMode)
+	{
+		ToonTankGameMode->ActorDied(DamagedActor);
+	}
+
+	//UE_LOG(LogTemp, Warning, TEXT("Damage taken: %f"), CurrentHealth);
 }
 
 
