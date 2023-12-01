@@ -26,5 +26,8 @@ private:
 
 	class ATank* Tank;
 	class AToonTankPlayerController* TankPlayerController;
+
+	float SecondsToStartGame = 3.f;
+	void HandleStartGame();
 	
 };
