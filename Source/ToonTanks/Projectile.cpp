@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -18,6 +19,10 @@ AProjectile::AProjectile()
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Movement"));
 	MovementComponent->InitialSpeed = 10.f;
 	MovementComponent->MaxSpeed = 100.f;
+
+	//Init Particle Component
+	SmokeTrailParticleComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Smoke Trail"));
+	SmokeTrailParticleComponent->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -46,19 +51,34 @@ void AProjectile::OnHit(
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Probando %s"), *OtherActor->GetName());
 
+	// Reference to the owner so we can get the AController
 	AActor* MyOwner = GetOwner();
 
-	if (MyOwner == nullptr) { return; }
+	if (MyOwner == nullptr) 
+	{ 
+		Destroy();
+		return; 
+	}
 
 	AController* OwnerInstigatorController = MyOwner->GetInstigatorController();
 	UClass* DamageType = UDamageType::StaticClass();
 
-	if (!(OtherActor && OtherActor != this && OtherActor != MyOwner))
+	if (OtherActor && OtherActor != this && OtherActor != MyOwner)
 	{
-		return;
+		UGameplayStatics::ApplyDamage(OtherActor, DamageAmount, OwnerInstigatorController, this, DamageType);
+		
+		if (HitParticleFX)
+		{
+			// We trigger the smoke FX before destroying the missile
+			UGameplayStatics::SpawnEmitterAtLocation(
+				this,
+				HitParticleFX,
+				GetActorLocation(),
+				GetActorRotation()
+			);
+		}
 	}
 
-	UGameplayStatics::ApplyDamage(OtherActor, DamageAmount, OwnerInstigatorController, this, DamageType);
 	Destroy();
 }
 

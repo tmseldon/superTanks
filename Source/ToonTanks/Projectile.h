@@ -33,6 +33,12 @@ private:
 	UPROPERTY(EditAnywhere)
 	float DamageAmount = 50.f;
 
+	UPROPERTY(EditAnywhere, Category = "Customize Projectile")
+	class UParticleSystem* HitParticleFX;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Customize Projectile", meta = (AllowPrivateAccess = "true"))
+	class UParticleSystemComponent* SmokeTrailParticleComponent;
+
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 };
