@@ -28,8 +28,21 @@ ABasePawn::ABasePawn()
 
 void ABasePawn::HandleDestruction()
 {
-	// [TODO] Add Sounnd and VFX here
+	// Adding FX and sound for destroy here
+	if (DeathParticleFX)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(
+			this,
+			DeathParticleFX,
+			GetActorLocation(),
+			GetActorRotation()
+		);
+	}
 
+	if (ExplosionSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, ExplosionSound, GetActorLocation());
+	}
 }
 
 void ABasePawn::RotateTurret(FVector LookAtTarget)

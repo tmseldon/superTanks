@@ -39,4 +39,10 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category="Combat")
 	TSubclassOf<class AProjectile> ProjectileReferenceType;
+
+	UPROPERTY(EditAnywhere, Category = "Customize Pawn")
+	class UParticleSystem* DeathParticleFX;
+
+	UPROPERTY(EditAnywhere, Category = "Customize Pawn")
+	class USoundBase* ExplosionSound;
 };

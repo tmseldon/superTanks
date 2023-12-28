@@ -36,8 +36,17 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Customize Projectile")
 	class UParticleSystem* HitParticleFX;
 
+	UPROPERTY(EditAnywhere, Category = "Customize Projectile")
+	USoundBase* LaunchProjectileSound;
+
+	UPROPERTY(EditAnywhere, Category = "Customize Projectile")
+	USoundBase* ImpactProjectileSound;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Customize Projectile", meta = (AllowPrivateAccess = "true"))
 	class UParticleSystemComponent* SmokeTrailParticleComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Customize Projectile")
+	TSubclassOf<class UCameraShakeBase> ImpactCameraShakeClass;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);

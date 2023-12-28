@@ -52,6 +52,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tank Parameters", meta = (AllowPrivateAccess = "true"))
 	float TankTurnRate = 100.f;
 
+	UPROPERTY(EditAnywhere, Category = "Tank Components")
+	TSubclassOf<class UCameraShakeBase> DeathCameraShakeClass;
+
 	void Move(float Value);
 
 	void Turn(float Value);

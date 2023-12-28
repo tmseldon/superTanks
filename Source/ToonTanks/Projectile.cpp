@@ -32,13 +32,17 @@ void AProjectile::BeginPlay()
 	
 	// Setting callback for OnHit Event
 	ProjectileMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
+
+	if (LaunchProjectileSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, LaunchProjectileSound, GetActorLocation());
+	}
 }
 
 // Called every frame
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Callback method when the projectile hits something
@@ -67,6 +71,8 @@ void AProjectile::OnHit(
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, DamageAmount, OwnerInstigatorController, this, DamageType);
 		
+		//All the effects below here
+
 		if (HitParticleFX)
 		{
 			// We trigger the smoke FX before destroying the missile
@@ -76,6 +82,16 @@ void AProjectile::OnHit(
 				GetActorLocation(),
 				GetActorRotation()
 			);
+		}
+
+		if (ImpactProjectileSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(this, ImpactProjectileSound, GetActorLocation());
+		}
+
+		if (ImpactCameraShakeClass)
+		{
+			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(ImpactCameraShakeClass);
 		}
 	}
 

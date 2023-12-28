@@ -78,6 +78,12 @@ void ATank::HandleDestruction()
 	// And we remove Tick so no game cycle is available for the player
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
+
+	// Shake camera effect
+	if (DeathCameraShakeClass)
+	{
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+	}
 }
 
 void ATank::Move(float Value)
