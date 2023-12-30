@@ -30,6 +30,9 @@ public:
 	// For now used by ToonTank Game Mode
 	APlayerController* GetTankPlayerController() const { return TankPlayerController; };
 
+	// Flag to know if the Tank is alive or not
+	bool bIsAlive = true;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

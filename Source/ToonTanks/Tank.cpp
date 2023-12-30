@@ -84,6 +84,8 @@ void ATank::HandleDestruction()
 	{
 		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
 	}
+
+	bIsAlive = false;
 }
 
 void ATank::Move(float Value)

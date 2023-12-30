@@ -43,7 +43,12 @@ void ATower::Tick(float DeltaTime)
 
 void ATower::CheckFireConditions()
 {
-	if (bIsPlayerInRange())
+	if (PlayerTank == nullptr)
+	{
+		return;
+	}
+
+	if (PlayerTank->bIsAlive && bIsPlayerInRange())
 	{
 		ABasePawn::Fire();
 	}

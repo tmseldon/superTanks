@@ -74,7 +74,7 @@ void ABasePawn::Fire()
 	//	3.f
 	//);
 
-	AActor* SpawnedProjectile = GetWorld()->SpawnActor<AProjectile>(
+	AProjectile* SpawnedProjectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileReferenceType,
 		ProjectileSpawnPoint->GetComponentLocation(),
 		ProjectileSpawnPoint->GetComponentRotation()
