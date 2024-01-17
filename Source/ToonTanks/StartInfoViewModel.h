@@ -14,8 +14,8 @@ class TOONTANKS_API UStartInfoViewModel : public UMVVMViewModelBase
 {
 	GENERATED_BODY()
 	
-private:
-	UPROPERTY(BlueprintReadOnly, FieldNotify, Setter, Getter, meta = (AllowPrivateAccess))
+protected:
+	UPROPERTY(BlueprintReadWrite, FieldNotify, Setter, Getter, meta = (AllowPrivateAccess))
 	FText MessageStart;
 
 public:
