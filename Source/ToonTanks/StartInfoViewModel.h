@@ -21,4 +21,7 @@ protected:
 public:
 	FText GetMessageStart() const;
 	void SetMessageStart(FText NewText);
+
+	UFUNCTION(BlueprintPure, FieldNotify)
+	FText GetModifiedMessage() const;
 };
